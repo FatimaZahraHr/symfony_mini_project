@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/css/nav.css"> 
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% block body %}
+          {% include 'menu.html.twig'%}
+    <br>
+    <div class="container">
+    {% for label,messages in app.flashes %}
+    <div class="container">
+    <div class="alert alert-{{label}}">
+    {% for message in messages %}
+    <p>{{ message | raw }}</p>
+    {% endfor %}
+    </div>
+    </div>
+    {% endfor %}
+    <h3>Ajouter un nouveau Projet</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(form) }}
+    </div>
+
+     {% endblock %}
+    {% block javascripts %}{% endblock %}
+    {% include 'footer.html.twig'%}
+
+    </body>
+</html>

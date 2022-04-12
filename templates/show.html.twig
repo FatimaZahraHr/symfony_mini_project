@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% include 'base.html.twig'%}
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+  {% block body %}
+    {% include 'menu.html.twig'%}
+<br>
+<div class="container">
+  <h2>Projet ({{projects.nomprojet}})</h2>
+  <p>Détails du projet:</p>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Numéro du dossier :</th>
+        <td>{{projects.numero}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <th>Client</th>
+        <td>{{ projects.idclient.nom}}</td>
+      </tr>
+      <tr>
+        <th>Nom du projet</th>
+        <td>{{projects.nomprojet}}</td>
+      </tr>
+      <tr>
+        <th>Type de projet</th>
+        <td>{{projects.type}}</td>
+      </tr>
+         <tr>
+        <th>Equipe de projet</th>
+        <td>{{projects.equipe}}</td>
+      </tr>
+         <tr>
+        <th>Notes</th>
+        <td>{{projects.note}}</td>
+      </tr>
+    </tbody>
+  </table>
+    {% set url=path('projet_edit',{'nomprojet': projects.nomprojet}) %}
+  <a href="{{ url }}"><button class="btn btn-danger"><i class="fa fa-edit"></i> Editer le projet</button></a>
+<br>
+ 
+<div class="container">
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+<button type="submit" class="btn btn-primary">Créer</button><br><br>
+{{ form_end(form) }}
+</div>
+  {% for tache in projects.taches %}
+  <div > <ul class="list-group">
+  {{ tache.categorie.nom}}
+  <li  class="list-group-item list-group-item-info">{{ tache.nom}}    
+  <span class="badge"><a href="{{ path('delete_tache',{'id': tache.id}) }}">
+  <button type="button"  class="btn btn-danger" >X</button></a>
+</span></li>
+</ul></div>
+   {% endfor %}
+</div>
+ {% endblock %}
+        {% block javascripts %}{% endblock %}
+        {% include 'footer.html.twig'%}
+
+</html>
